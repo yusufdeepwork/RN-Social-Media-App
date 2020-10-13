@@ -62,8 +62,7 @@ const DetailsStackScreen = ({navigation}) => {
           backgroundColor="#009387"
           options={() => {
             navigation.openDrawer();
-          }}
-        ></Icon.Button>
+          }}></Icon.Button>
       ),
     }}
   </DetailsStack>;
