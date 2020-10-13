@@ -1,56 +1,11 @@
 import 'react-native-gesture-handler';
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {View, Text, Button} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
+import HomeScreen from './screens/HomeScreen';
+import DetailScreen from './screens/DetailsScreen';
+
 const Stack = createStackNavigator();
-
-const HomeScreen = ({navigation}) => {
-  return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Home Screen</Text>
-      <Button
-        title="go to details screen"
-        onPress={() => {
-          navigation.navigate('details');
-        }}
-      />
-    </View>
-  );
-};
-
-const DetailScreen = ({navigation}) => {
-  return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Detail Screen</Text>
-      <Button
-        title="go to details screen...again"
-        onPress={() => {
-          navigation.push('Details');
-        }}
-      />
-      <Button
-        title="go to Home"
-        onPress={() => {
-          navigation.navigate('Home');
-        }}
-      />
-      <Button
-        title="Go Back"
-        onPress={() => {
-          navigation.goBack();
-        }}
-      />
-
-      <Button
-        title="Go To Firs Screen"
-        onPress={() => {
-          navigation.popToTop();
-        }}
-      />
-    </View>
-  );
-};
 
 export default function App() {
   return (
