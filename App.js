@@ -4,9 +4,8 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import HomeScreen from './screens/HomeScreen';
 import DetailScreen from './screens/DetailsScreen';
-
-const Stack = createStackNavigator();
-
+import {createDrawerNavigator} from '@react-navigation/drawer';
+const Drawer = createDrawerNavigator();
 export default function App() {
   return (
     <NavigationContainer
@@ -19,12 +18,10 @@ export default function App() {
           fontWeight: 'bold',
         },
       }}>
-      <Stack.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{title: 'Overview'}}
-      />
-      <Stack.Screen name="Details" component={DetailScreen} />
+      <Drawer.Navigator initialRouteName="Home">
+        <Drawer.Screen name="Home" component={HomeScreen} />
+        <Drawer.Screen name="Details" component={DetailScreen} />
+      </Drawer.Navigator>
     </NavigationContainer>
   );
 }
