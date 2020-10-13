@@ -84,7 +84,7 @@ const HomeStackScreen = ({navigation}) => {
             name="ios-menu"
             size={25}
             backgroundColor="1f65ff"
-            options={() => {
+            onPress={() => {
               navigation.openDrawer();
             }}
           />
@@ -113,7 +113,7 @@ const DetailsStackScreen = ({navigation}) => {
           name="ios-menu"
           size={25}
           backgroundColor="#009387"
-          options={() => {
+          onPress={() => {
             navigation.openDrawer();
           }}
         />
