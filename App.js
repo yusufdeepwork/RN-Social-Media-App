@@ -15,9 +15,9 @@ export default function App() {
     <NavigationContainer>
       <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
         <Drawer.Screen name="HomeDrawer" component={MainTabScreen} />
-        <Drawer.Screen name="" component={SupportScreen} />
-        <Drawer.Screen name="" component={SettingsScreen} />
-        <Drawer.Screen name="" component={BookmarkScreen} />
+        <Drawer.Screen name="Support" component={SupportScreen} />
+        <Drawer.Screen name="Settings" component={SettingsScreen} />
+        <Drawer.Screen name="Bookmarks" component={BookmarkScreen} />
       </Drawer.Navigator>
     </NavigationContainer>
   );

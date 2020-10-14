@@ -41,7 +41,7 @@ const MainTabScreen = () => (
       component={ProfileScreen}
       options={{
         tabBarLabel: 'Profile',
-        tabBarColor: ' #694fad',
+        tabBarColor: '#694fad',
         tabBarIcon: ({color}) => (
           <Icon name="ios-person" color={color} size={26} />
         ),
@@ -63,7 +63,7 @@ const MainTabScreen = () => (
 
 export default MainTabScreen;
 
-const HomeStackScreen = ({navigation}) => {
+const HomeStackScreen = ({navigation}) => (
   <HomeStack.Navigator
     screenOptions={{
       headerStyle: {
@@ -83,41 +83,38 @@ const HomeStackScreen = ({navigation}) => {
           <Icon.Button
             name="ios-menu"
             size={25}
-            backgroundColor="1f65ff"
-            onPress={() => {
-              navigation.openDrawer();
-            }}
+            backgroundColor="#009387"
+            onPress={() => navigation.openDrawer()}
           />
         ),
       }}
     />
-  </HomeStack.Navigator>;
-};
-const DetailsStackScreen = ({navigation}) => {
-  <DetailsStack
+  </HomeStack.Navigator>
+);
+const DetailsStackScreen = ({navigation}) => (
+  <DetailsStack.Navigator
     screenOptions={{
       headerStyle: {
         backgroundColor: '#1f65ff',
       },
-      headerTintColo: '#fff',
+      headerTintColor: '#fff',
       headerTitleStyle: {
         fontWeight: 'bold',
       },
     }}>
-    <DetailsStack.Screen name="Details" component={DetailScreen} />
-    options= options=
-    {{
-      title: 'Overview',
-      headerLeft: () => (
-        <Icon.Button
-          name="ios-menu"
-          size={25}
-          backgroundColor="#009387"
-          onPress={() => {
-            navigation.openDrawer();
-          }}
-        />
-      ),
-    }}
-  </DetailsStack>;
-};
+    <DetailsStack.Screen
+      name="Details"
+      component={DetailScreen}
+      options={{
+        headerLeft: () => (
+          <Icon.Button
+            name="ios-menu"
+            size={25}
+            backgroundColor="#1f65ff"
+            onPress={() => navigation.openDrawer()}
+          />
+        ),
+      }}
+    />
+  </DetailsStack.Navigator>
+);

@@ -55,7 +55,7 @@ export function DrawerContent(props) {
           </View>
           <Drawer.Section style={styles.drawerContent}>
             <DrawerItem
-              icon={(color, size) => (
+              icon={({color, size}) => (
                 <Icon name="home-outline" color={color} size={size} />
               )}
               label="Home"
@@ -64,7 +64,7 @@ export function DrawerContent(props) {
               }}
             />
             <DrawerItem
-              icon={(color, size) => (
+              icon={({color, size}) => (
                 <Icon name="account-outline" color={color} size={size} />
               )}
               label="Profile"
@@ -73,40 +73,40 @@ export function DrawerContent(props) {
               }}
             />
             <DrawerItem
-              icon={(color, size) => (
+              icon={({color, size}) => (
                 <Icon name="bookmark-outline" color={color} size={size} />
               )}
               label="Bookmarks"
               onPress={() => {
-                props.navigation.navigate('BookmarkScreen');
+                props.navigation.navigate('Bookmarks');
               }}
             />
             <DrawerItem
-              icon={(color, size) => (
-                <Icon name="settings-outline" color={color} size={size} />
+              icon={({color, size}) => (
+                <Icon name="cog-outline" color={color} size={size} />
               )}
               label="Settings"
               onPress={() => {
-                props.navigation.navigate('SettingsScreen');
+                props.navigation.navigate('Settings');
               }}
             />
             <DrawerItem
-              icon={(color, size) => (
+              icon={({color, size}) => (
                 <Icon name="account-check-outline" color={color} size={size} />
               )}
               label="Support"
               onPress={() => {
-                props.navigation.navigate('SupportScreen');
+                props.navigation.navigate('Support');
               }}
             />
           </Drawer.Section>
-          <Drawer.Section title="Preferences">
-            <TouchableRipple
+          <Drawer.Section title="Preferences" >
+            <TouchableRipple 
               onPress={() => {
                 toggleTheme();
               }}>
               <View style={styles.preference}>
-                <Text>Dark Theme</Text>
+                <Text style={{marginLeft:18}}>Dark Theme</Text>
                 <View pointerEvents="none">
                   <Switch value={isDarkTheme} />
                 </View>
@@ -117,7 +117,7 @@ export function DrawerContent(props) {
       </DrawerContentScrollView>
       <Drawer.Section style={styles.bottomDrawerSection}>
         <DrawerItem
-          icon={(color, size) => (
+          icon={({color, size}) => (
             <Icon name="exit-to-app" color={color} size={size} />
           )}
           label="Sign Out"
