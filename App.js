@@ -7,18 +7,20 @@ import {DrawerContent} from './screens/DrawerContent';
 import BookmarkScreen from './screens/BookmarkScreen';
 import SettingsScreen from './screens/SettingsScreen';
 import SupportScreen from './screens/SupportScreen';
+import RootStackScreen from './screens/RootStackScreen';
 
 const Drawer = createDrawerNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
+      <RootStackScreen />
+      {/* <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
         <Drawer.Screen name="HomeDrawer" component={MainTabScreen} />
         <Drawer.Screen name="Support" component={SupportScreen} />
         <Drawer.Screen name="Settings" component={SettingsScreen} />
         <Drawer.Screen name="Bookmarks" component={BookmarkScreen} />
-      </Drawer.Navigator>
+      </Drawer.Navigator> */}
     </NavigationContainer>
   );
 }
