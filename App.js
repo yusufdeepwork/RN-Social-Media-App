@@ -18,7 +18,7 @@ import {AuthContext} from './components/context';
 
 const Drawer = createDrawerNavigator();
 
-export default function App() {
+const App = () => {
   // eslint-disable-next-line no-trailing-spaces
   
   // For Loading Progress
@@ -56,16 +56,21 @@ export default function App() {
   return (
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
-        {userToken !== null }{
+        { userToken != null ? (
           <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
             <Drawer.Screen name="HomeDrawer" component={MainTabScreen} />
             <Drawer.Screen name="Support" component={SupportScreen} />
             <Drawer.Screen name="Settings" component={SettingsScreen} />
             <Drawer.Screen name="Bookmarks" component={BookmarkScreen} />
           </Drawer.Navigator>
-        }
+        ) :
         <RootStackScreen />
+
+        }
+
       </NavigationContainer>
     </AuthContext.Provider>
   );
-}
+};
+
+export default App;
