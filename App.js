@@ -22,7 +22,49 @@ const App = () => {
   // eslint-disable-next-line no-trailing-spaces
   
   // For Loading Progress
-  const [isLoading, setIsLoading] = React.useState(true);
+  // const [isLoading, setIsLoading] = React.useState(true);
+  // const [userToken, setUserToken] = React.useState(null);
+
+  const initialLoginState = {
+    isLoading: true,
+    userName: null,
+    userToken: null,
+  };
+
+  const loginReducer = (prevState, action) => {
+    const {id, token} = action;
+    switch (action.type) {
+      case 'RETRIEVE_TOKEN':
+        return {
+          ...prevState,
+          userToken: token,
+          isLoading: false,
+        };
+      case 'LOGIN':
+        return {
+          ...prevState,
+          userName: id,
+          userToken: token,
+          isLoading: false,
+        };
+      case 'LOGOUT':
+        return {
+          ...prevState,
+          userName: null,
+          userToken: null,
+          isLoading: false,
+        };
+      case 'REGISTER':
+        return {
+          ...prevState,
+          userName: id,
+          userToken: token,
+          isLoading: false,
+        };
+    }
+  };
+
+  const [loginState, dispatch] = React.useReducer(loginReducer, initialLoginState);
 
   useEffect(()=> {
     setTimeout(()=> {
@@ -36,7 +78,6 @@ const App = () => {
     </View>;
   }
 
-  const [userToken, setUserToken] = React.useState(null);
   const authContext = React.useMemo(()=>({
     signIn: () => {
       setUserToken('fffgj');
