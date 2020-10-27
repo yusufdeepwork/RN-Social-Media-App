@@ -14,6 +14,7 @@ import RootStackScreen from './screens/RootStackScreen';
 import {useEffect} from 'react';
 import {View} from 'react-native-animatable';
 import {ActivityIndicator} from 'react-native-paper';
+import {AuthContext} from './components/context';
 
 const Drawer = createDrawerNavigator();
 
@@ -21,7 +22,7 @@ export default function App() {
   // eslint-disable-next-line no-trailing-spaces
   
   // For Loading Progress
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = React.useState(true);
 
   useEffect(()=> {
     setTimeout(()=> {
@@ -35,15 +36,34 @@ export default function App() {
     </View>;
   }
 
+  const [userToken, setUserToken] = React.useState(null);
+  const authContext = React.useMemo(()=>({
+    signIn: () => {
+      setUserToken('fffgj');
+      setIsLoading(false);
+    },
+    signOut: () => {
+      setUserToken(null);
+      setIsLoading(false);
+    },
+    signUp: () => {
+      setUserToken('dfhj');
+      setIsLoading(false);
+    },
+  }));
+
+
   return (
-    <NavigationContainer>
-      <RootStackScreen />
-      {/* <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
+    <AuthContext.Provider value={authContext}>
+      <NavigationContainer>
+        <RootStackScreen />
+        {/* <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
         <Drawer.Screen name="HomeDrawer" component={MainTabScreen} />
         <Drawer.Screen name="Support" component={SupportScreen} />
         <Drawer.Screen name="Settings" component={SettingsScreen} />
         <Drawer.Screen name="Bookmarks" component={BookmarkScreen} />
       </Drawer.Navigator> */}
-    </NavigationContainer>
+      </NavigationContainer>
+    </AuthContext.Provider>
   );
 }
