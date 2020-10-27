@@ -15,6 +15,7 @@ import {useEffect} from 'react';
 import {View} from 'react-native-animatable';
 import {ActivityIndicator} from 'react-native-paper';
 import {AuthContext} from './components/context';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Drawer = createDrawerNavigator();
 
@@ -66,32 +67,61 @@ const App = () => {
 
   const [loginState, dispatch] = React.useReducer(loginReducer, initialLoginState);
 
-  useEffect(()=> {
-    setTimeout(()=> {
-      setIsLoading(false);
-    }, 1000);
-  }, []);
 
-  if (isLoading) {
+  const {userToken} = loginState;
+  if (loginState.isLoading) {
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}} >
       <ActivityIndicator size="large" />
     </View>;
   }
 
   const authContext = React.useMemo(()=>({
-    signIn: () => {
-      setUserToken('fffgj');
-      setIsLoading(false);
+    signIn: async (userName, password) => {
+      // setUserToken('fffgj');
+      // setIsLoading(false);
+      let userToken;
+      userToken= null;
+      if ( userName == 'user' && password == 'pass') {
+        userToken = 'dfdgdfgd';
+        try {
+          await AsyncStorage.setItem('userToken', userToken);
+        } catch (error) {
+
+        }
+      }
+      dispatch({type: 'LOGIN', id: userName, token: userToken});
     },
-    signOut: () => {
-      setUserToken(null);
-      setIsLoading(false);
+    signOut: async() => {
+      try {
+        await AsyncStorage.removeItem('userToken');
+      } catch (error) {
+
+      }
+      dispatch({type: 'LOGOUT'});
+      // setUserToken(null);
+      // setIsLoading(false);
     },
     signUp: () => {
       setUserToken('dfhj');
       setIsLoading(false);
     },
   }), []);
+  useEffect(()=> {
+    let userToken;
+    userToken = null;
+    setTimeout(async ()=> {
+      // setIsLoading(false);
+      if ( userName == 'user' && password == 'pass') {
+        userToken = 'dfdgdfgd';
+        try {
+          userToken = await AsyncStorage.getItem('userToken');
+        } catch (error) {
+
+        }
+      }
+      dispatch({type: 'RETRIEVE_TOKEN', token: userToken});
+    }, 1000);
+  }, []);
 
 
   return (
