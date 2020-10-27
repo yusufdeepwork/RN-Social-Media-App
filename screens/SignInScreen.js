@@ -7,13 +7,14 @@ import {
   Platform,
   TouchableOpacity,
   StatusBar,
-  Dimensions,
-  Image,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import * as Animatable from 'react-native-animatable';
+
+import {AuthContext} from '../components/context';
+
 
 const SignInScreen = ({navigation}) => {
   const [data, setData] = React.useState({
@@ -22,6 +23,10 @@ const SignInScreen = ({navigation}) => {
     check_textInputChange: false,
     secureTextEntry: true,
   });
+
+
+  const {signIn} = React.useContext(AuthContext);
+
   const textInputChange = (val) => {
     if (val.length !== 0) {
       setData({
@@ -90,10 +95,24 @@ const SignInScreen = ({navigation}) => {
             )}
           </TouchableOpacity>
         </View>
+
+        <TouchableOpacity>
+          <Text style={{color: '#009387', marginTop: 15}}>Forgot Password</Text>
+        </TouchableOpacity>
+
         <View style={styles.button}>
-          <LinearGradient colors={['#08d4c4', '#01ab9d']} style={styles.signIn}>
-            <Text style={[styles.textSign, {color: '#fff'}]}>Sign In</Text>
-          </LinearGradient>
+          <TouchableOpacity
+            style={styles.signIn}
+            onPress={()=> {
+              signIn();
+            }}
+          >
+            <LinearGradient colors={['#08d4c4', '#01ab9d']}
+              style={styles.signIn}>
+              <Text style={[styles.textSign, {color: '#fff'}]}>Sign In</Text>
+            </LinearGradient>
+
+          </TouchableOpacity>
           <TouchableOpacity
             onPress={() => navigation.navigate('SignUpScreen')}
             style={[
