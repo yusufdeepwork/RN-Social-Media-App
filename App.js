@@ -50,7 +50,7 @@ const App = () => {
       setUserToken('dfhj');
       setIsLoading(false);
     },
-  }));
+  }), []);
 
 
   return (
