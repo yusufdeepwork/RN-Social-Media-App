@@ -22,6 +22,8 @@ const SignInScreen = ({navigation}) => {
     password: '',
     check_textInputChange: false,
     secureTextEntry: true,
+    isValidUser: true,
+    isValidPassword: true,
   });
 
 
@@ -33,15 +35,33 @@ const SignInScreen = ({navigation}) => {
         ...data,
         username: val,
         check_textInputChange: true,
+        isValidUser: true,
       });
     } else {
       setData({
         ...data,
         username: val,
         check_textInputChange: false,
+        isValidUser: false,
       });
     }
   };
+
+
+  const handleValidUser = (val) => {
+    if (val.trim().length >= 4 ) {
+      setData({
+        ...data,
+        isValidUser: true,
+      });
+    } else {
+      setData({
+        ...data,
+        isValidUser: false,
+      });
+    }
+  };
+
   const handlePasswordChange = (val) => {
     setData({
       ...data,
@@ -73,6 +93,7 @@ const SignInScreen = ({navigation}) => {
             style={styles.textInput}
             autoCapitalize="none"
             onChangeText={(val) => textInputChange(val)}
+            onEndEditing={(e) => handleValidUser(e.nativeEvent.text)}
           />
           {data.check_textInputChange ? (
             <Animatable.View animation="bounceIn">
@@ -80,6 +101,13 @@ const SignInScreen = ({navigation}) => {
             </Animatable.View>
           ) : null}
         </View>
+        { data.isValidUser ? null :
+        <Animatable.View animation="fadeInLeft" duration={500}>
+          <Text style={styles.errorMsg}>
+          Username must be 4 characters long.
+          </Text>
+        </Animatable.View>}
+
         <Text style={[styles.text_footer, {marginTop: 35}]}>Password</Text>
         <View style={styles.action}>
           <Feather name="lock" color="#05375a" size={20} />
@@ -92,12 +120,23 @@ const SignInScreen = ({navigation}) => {
           />
           <TouchableOpacity onPress={updateSecureTextEntry}>
             {data.secureTextEntry ? (
-              <Feather name="eye-off" color="grey" size={20} />
+              <Feather
+                name="eye-off"
+                color="grey"
+                size={20} />
             ) : (
-              <Feather name="eye" color="grey" size={20} />
+              <Feather
+                name="eye"
+                color="grey"
+                size={20} />
             )}
           </TouchableOpacity>
         </View>
+        {data.isValidPassword ? null :
+         <Animatable.View animation="fadeInLeft" duration={500}>
+           <Text style={styles.errorMsg}>
+          Password must be 8 characters long.</Text>
+         </Animatable.View> }
 
         <TouchableOpacity>
           <Text style={{color: '#009387', marginTop: 15}}>Forgot Password</Text>
