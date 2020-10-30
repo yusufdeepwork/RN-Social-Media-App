@@ -7,6 +7,7 @@ import {
   Platform,
   TouchableOpacity,
   StatusBar,
+  Alert,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -14,7 +15,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import * as Animatable from 'react-native-animatable';
 
 import {AuthContext} from '../components/context';
-
+import Users from '../model/users';
 
 // eslint-disable-next-line react/prop-types
 const SignInScreen = ({navigation}) => {
@@ -84,8 +85,17 @@ const SignInScreen = ({navigation}) => {
       secureTextEntry: !data.secureTextEntry,
     });
   };
-  const loginHandle = (username, password) => {
-    signIn(username, password);
+  const loginHandle = (userName, password) => {
+    const foundUser = Users.filter( (item) => {
+      return userName == item.username && password == item.password;
+    });
+    if (foundUser.length == 0 ) {
+      Alert.alert('Invalid User!', 'Username or password is incorrect', [
+        {text: 'Okay'},
+      ]);
+      return;
+    }
+    signIn(foundUser);
   };
 
   return (
