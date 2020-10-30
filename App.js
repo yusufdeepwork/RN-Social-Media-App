@@ -85,7 +85,6 @@ const App = () => {
       try {
         await AsyncStorage.setItem('userToken', userToken);
       } catch (error) {
-
       }
 
       dispatch({type: 'LOGIN', id: userName, token: userToken});
