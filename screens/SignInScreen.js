@@ -16,6 +16,7 @@ import * as Animatable from 'react-native-animatable';
 import {AuthContext} from '../components/context';
 
 
+// eslint-disable-next-line react/prop-types
 const SignInScreen = ({navigation}) => {
   const [data, setData] = React.useState({
     username: '',
@@ -63,10 +64,19 @@ const SignInScreen = ({navigation}) => {
   };
 
   const handlePasswordChange = (val) => {
-    setData({
-      ...data,
-      password: val,
-    });
+    if (val.trim().length >= 8) {
+      setData({
+        ...data,
+        password: val,
+        isValidPassword: true,
+      });
+    } else {
+      setData({
+        ...data,
+        password: val,
+        isValidPassword: false,
+      });
+    }
   };
   const updateSecureTextEntry = () => {
     setData({
