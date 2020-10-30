@@ -76,22 +76,21 @@ const App = () => {
   }
 
   const authContext = React.useMemo(()=>({
-    signIn: async (userName, password) => {
+    signIn: async (foundUser) => {
       // setUserToken('fffgj');
       // setIsLoading(false);
-      let userToken;
-      userToken= null;
-      if ( userName == 'user' && password == 'pass') {
-        userToken = 'dfdgdfgd';
-        try {
-          await AsyncStorage.setItem('userToken', userToken);
-        } catch (error) {
+      const userToken= String(foundUser[0].userToken);
+      const userName= foundUser[0].username;
 
-        }
+      try {
+        await AsyncStorage.setItem('userToken', userToken);
+      } catch (error) {
+
       }
+
       dispatch({type: 'LOGIN', id: userName, token: userToken});
     },
-    signOut: async() => {
+    signOut: async () => {
       try {
         await AsyncStorage.removeItem('userToken');
       } catch (error) {
