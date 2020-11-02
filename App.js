@@ -14,6 +14,7 @@ import RootStackScreen from './screens/RootStackScreen';
 import {useEffect} from 'react';
 import {View} from 'react-native-animatable';
 import {ActivityIndicator} from 'react-native-paper';
+import {Provider as PaperProvider, DarkTheme as PaperDarkTheme} from 'react-native-paper';
 import {AuthContext} from './components/context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -123,9 +124,10 @@ const App = () => {
 
 
   return (
-    <AuthContext.Provider value={authContext}>
-      <NavigationContainer theme={DarkTheme}>
-        { userToken != null ? (
+    <PaperProvider theme={PaperDarkTheme}>
+      <AuthContext.Provider value={authContext}>
+        <NavigationContainer theme={DarkTheme}>
+          { userToken != null ? (
           <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
             <Drawer.Screen name="HomeDrawer" component={MainTabScreen} />
             <Drawer.Screen name="Support" component={SupportScreen} />
@@ -135,10 +137,12 @@ const App = () => {
         ) :
         <RootStackScreen />
 
-        }
 
-      </NavigationContainer>
-    </AuthContext.Provider>
+          }
+
+        </NavigationContainer>
+      </AuthContext.Provider>
+    </PaperProvider>
   );
 };
 
