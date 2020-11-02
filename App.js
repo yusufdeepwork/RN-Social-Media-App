@@ -3,7 +3,7 @@
 /* eslint-disable max-len */
 import * as React from 'react';
 import 'react-native-gesture-handler';
-import {NavigationContainer} from '@react-navigation/native';
+import {NavigationContainer, DarkTheme} from '@react-navigation/native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import MainTabScreen from './screens/MainTabScreen';
 import {DrawerContent} from './screens/DrawerContent';
@@ -124,7 +124,7 @@ const App = () => {
 
   return (
     <AuthContext.Provider value={authContext}>
-      <NavigationContainer>
+      <NavigationContainer theme={DarkTheme}>
         { userToken != null ? (
           <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
             <Drawer.Screen name="HomeDrawer" component={MainTabScreen} />
