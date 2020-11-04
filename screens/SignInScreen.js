@@ -16,9 +16,12 @@ import * as Animatable from 'react-native-animatable';
 
 import {AuthContext} from '../components/context';
 import Users from '../model/users';
+import {useTheme} from 'react-native-paper';
 
 // eslint-disable-next-line react/prop-types
 const SignInScreen = ({navigation}) => {
+  const {colors} = useTheme;
+
   const [data, setData] = React.useState({
     username: '',
     password: '',
@@ -113,13 +116,16 @@ const SignInScreen = ({navigation}) => {
       <View style={styles.header}>
         <Text style={styles.text_header}>Welcome!</Text>
       </View>
-      <Animatable.View animation="fadeInUpBig" style={styles.footer}>
-        <Text style={styles.text_footer}>Username</Text>
+      <Animatable.View animation="fadeInUpBig" style={[styles.footer,
+        {backgroundColor: colors.background}]}>
+        <Text style={[styles.text_footer, {
+          color: colors.text,
+        }]}>Username</Text>
         <View style={styles.action}>
-          <FontAwesome name="user-o" color="#05375a" size={20} />
+          <FontAwesome name="user-o" color={colors.text} size={20} />
           <TextInput
             placeholder="Your Username"
-            style={styles.textInput}
+            style={[styles.textInput, {color: colors.text}]}
             autoCapitalize="none"
             onChangeText={(val) => textInputChange(val)}
             onEndEditing={(e) => handleValidUser(e.nativeEvent.text)}
@@ -137,13 +143,14 @@ const SignInScreen = ({navigation}) => {
           </Text>
         </Animatable.View>}
 
-        <Text style={[styles.text_footer, {marginTop: 35}]}>Password</Text>
+        <Text style={[styles.text_footer, {marginTop: 35},
+          {color: colors.text}]}>Password</Text>
         <View style={styles.action}>
-          <Feather name="lock" color="#05375a" size={20} />
+          <Feather name="lock" color={colors.text} size={20} />
           <TextInput
             placeholder="Your Password"
             secureTextEntry={data.secureTextEntry ? true : false}
-            style={styles.textInput}
+            style={[styles.textInput, {color: colors.text}]}
             autoCapitalize="none"
             onChangeText={(val) => handlePasswordChange(val)}
           />
