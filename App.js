@@ -3,7 +3,11 @@
 /* eslint-disable max-len */
 import * as React from 'react';
 import 'react-native-gesture-handler';
-import {NavigationContainer, DarkTheme} from '@react-navigation/native';
+import {NavigationContainer,
+  DefaultTheme as NavigationDefaultTheme,
+  DarkTheme as NavigationDarkTheme,
+}
+  from '@react-navigation/native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import MainTabScreen from './screens/MainTabScreen';
 import {DrawerContent} from './screens/DrawerContent';
@@ -14,7 +18,9 @@ import RootStackScreen from './screens/RootStackScreen';
 import {useEffect} from 'react';
 import {View} from 'react-native-animatable';
 import {ActivityIndicator} from 'react-native-paper';
-import {Provider as PaperProvider, DarkTheme as PaperDarkTheme} from 'react-native-paper';
+import {Provider as PaperProvider,
+  DefaultTheme as PaperDefaultTheme,
+  DarkTheme as PaperDarkTheme} from 'react-native-paper';
 import {AuthContext} from './components/context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -27,11 +33,34 @@ const App = () => {
   // const [isLoading, setIsLoading] = React.useState(true);
   // const [userToken, setUserToken] = React.useState(null);
 
+  const [isDarkTheme, setIsDarkTheme] = React.useState(false);
+
+
   const initialLoginState = {
     isLoading: true,
     userName: null,
     userToken: null,
   };
+  const CustomDefaultTheme = {
+    ...NavigationDefaultTheme,
+    ...PaperDefaultTheme,
+    colors: {
+      ...NavigationDefaultTheme.colors,
+      ...PaperDefaultTheme.colors,
+    },
+  };
+
+  const CustomDarkTheme = {
+    ...NavigationDarkTheme,
+    ...PaperDarkTheme,
+    colors: {
+      ...NavigationDarkTheme.colors,
+      ...PaperDarkTheme.colors,
+    },
+  };
+
+  const theme = isDarkTheme ? CustomDefaultTheme : CustomDarkTheme;
+
 
   const loginReducer = (prevState, action) => {
     const {id, token} = action;
@@ -124,9 +153,9 @@ const App = () => {
 
 
   return (
-    <PaperProvider theme={PaperDarkTheme}>
+    <PaperProvider theme={theme}>
       <AuthContext.Provider value={authContext}>
-        <NavigationContainer theme={DarkTheme}>
+        <NavigationContainer theme={theme}>
           { userToken != null ? (
           <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
             <Drawer.Screen name="HomeDrawer" component={MainTabScreen} />
