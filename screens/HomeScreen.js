@@ -5,7 +5,7 @@ import {useTheme} from '@react-navigation/native';
 import {color} from 'react-native-reanimated';
 
 export default HomeScreen = ({navigation}) => {
-  const {colors} = useTheme;
+  const {colors} = useTheme();
   const theme = useTheme;
   return (
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>

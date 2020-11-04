@@ -136,6 +136,8 @@ const App = () => {
     signUp: () => {
       setUserToken('dfhj');
       setIsLoading(false);
+    }, toggleTheme: () => {
+      setIsDarkTheme( (isDarkTheme) => !isDarkTheme );
     },
   }), []);
   useEffect(()=> {

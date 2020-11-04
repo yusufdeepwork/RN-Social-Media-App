@@ -13,7 +13,7 @@ import * as Animatable from 'react-native-animatable';
 import {useTheme} from '@react-navigation/native';
 
 const SplashScreen = ({navigation}) => {
-  const {colors} = useTheme;
+  const {colors} = useTheme();
   const theme = useTheme;
   return (
     <View style={styles.container}>

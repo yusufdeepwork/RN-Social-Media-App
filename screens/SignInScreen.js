@@ -20,7 +20,7 @@ import {useTheme} from 'react-native-paper';
 
 // eslint-disable-next-line react/prop-types
 const SignInScreen = ({navigation}) => {
-  const {colors} = useTheme;
+  const {colors} = useTheme();
 
   const [data, setData] = React.useState({
     username: '',
@@ -262,5 +262,8 @@ const styles = StyleSheet.create({
   textSign: {
     fontSize: 18,
     fontWeight: 'bold',
+  },
+  errorMsg: {
+    color: '#ef5350',
   },
 });
